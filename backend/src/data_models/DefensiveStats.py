@@ -1,17 +1,18 @@
 from sqlalchemy import Column, Integer
-from sqlalchemy.orm import declarative_base
 from sqlalchemy.sql.schema import ForeignKey
 from sqlalchemy.sql.sqltypes import Float
+from constants import(
+    Base,
+    engine
+)
 
-
-Base = declarative_base()
 
 class DefensiveStats(Base):
     __tablename__ = 'defensive_stats'
-    player_id = Column(Integer, ForeignKey('player_info.player_id'))
+    player_id = Column(Integer, ForeignKey('player_info.player_id'), primary_key=True)
     long_int_ret = Column(Integer)
     sacks = Column(Float)
-    year = Column(Integer)
+    year = Column(Integer, ForeignKey('week_year.year'))
     forced_fumbles = Column(Integer)
     solo_tkls = Column(Float)
     safeties = Column(Integer)

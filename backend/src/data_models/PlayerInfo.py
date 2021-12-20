@@ -1,9 +1,7 @@
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import declarative_base
 from sqlalchemy.sql.schema import ForeignKey
+from constants import Base
 
-
-Base = declarative_base()
 
 class PlayerInfo(Base):
     __tablename__ = 'player_info'

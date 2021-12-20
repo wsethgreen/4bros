@@ -1,8 +1,6 @@
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import declarative_base
+from constants import Base
 
-
-Base = declarative_base()
 
 class TeamInfo(Base):
     __tablename__ = 'team_info'

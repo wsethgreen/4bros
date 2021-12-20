@@ -1,13 +1,11 @@
 from sqlalchemy import Column, Integer
-from sqlalchemy.orm import declarative_base
 from sqlalchemy.sql.schema import ForeignKey
+from constants import Base
 
-
-Base = declarative_base()
 
 class KickingStats(Base):
     __tablename__ = 'kicking_stats'
-    player_id = Column(Integer, ForeignKey('player_info.player_id'))
+    player_id = Column(Integer, ForeignKey('player_info.player_id'), primary_key=True)
     fg_made_17_29 = Column(Integer)
     fg_att_17_29 = Column(Integer)
     long_fg = Column(Integer)

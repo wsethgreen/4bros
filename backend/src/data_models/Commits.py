@@ -1,13 +1,16 @@
-from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import declarative_base
+from sqlalchemy import(
+    Column,
+    Integer,
+    String
+)
 
+from constants import Base
 
-Base = declarative_base()
 
 class Commits(Base):
     __tablename__ = 'commits'
     stars = Column(Integer)
-    name = Column(String(50))
+    name = Column(String(50), primary_key=True)
     position = Column(String(50))
     rank = Column(Integer)
     school = Column(String(50))

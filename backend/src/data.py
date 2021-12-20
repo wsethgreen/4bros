@@ -1,24 +1,20 @@
+from typing import List
 import ncaa_dynasty
 import sqlalchemy
 
-dynasty_file_path = 'D:\Content\E00001485AECABB5\\454109B6\\00000001\OD-4Bros3'
-user_teams = {'Syracuse', 'USC', 'Vanderbilt', 'Wyoming'}
+from constants import(
+    dynasty_file_path,
+    user_teams
+)
+
 
 data = ncaa_dynasty.read_database(dynasty_file_path, user_teams)
 
-def_stats = data['Defensive Stats']
-kicking_stats = data['Kicking Stats']
-player_info = data['Player Info']
-commits = data['Committed Recruits']
-return_stats = data['Return Stats']
-off_stats = data['Offensive Stats']
-week_year = data['Week/Year']
-team_info = data['Team Info']
-
-
-
-for key in week_year.records[0].fields:
-    print(key)
-
-# for record in player_info.records[0:2]:
-#     print(record.fields)
+def_stats = data['Defensive Stats'].records
+kicking_stats = data['Kicking Stats'].records
+player_info = data['Player Info'].records
+commits = data['Committed Recruits'].records
+return_stats = data['Return Stats'].records
+off_stats = data['Offensive Stats'].records
+week_year = data['Week/Year'].records
+team_info = data['Team Info'].records

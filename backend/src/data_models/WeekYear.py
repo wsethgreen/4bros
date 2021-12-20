@@ -1,12 +1,15 @@
 from sqlalchemy import Column, Integer
-from sqlalchemy.orm import declarative_base
+from constants import(
+    Base,
+    engine,
+    session
+)
 
-
-Base = declarative_base()
 
 class WeekYear(Base):
     __tablename__ = 'week_year'
     week = Column(Integer)
-    year = Column(Integer)
+    year = Column(Integer, primary_key=True)
 
-WeekYear.__table__
+
+# Base.metadata.create_all(engine)

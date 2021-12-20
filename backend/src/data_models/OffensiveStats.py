@@ -1,13 +1,11 @@
 from sqlalchemy import Column, Integer
-from sqlalchemy.orm import declarative_base
 from sqlalchemy.sql.schema import ForeignKey
+from constants import Base
 
-
-Base = declarative_base()
 
 class OffensiveStats(Base):
     __tablename__ = 'offensive_stats'
-    player_id = Column(Integer, ForeignKey('player_info.player_id'))
+    player_id = Column(Integer, ForeignKey('player_info.player_id'), primary_key=True)
     pass_yards = Column(Integer)
     longest_rec = Column(Integer)
     longest_pass = Column(Integer)
