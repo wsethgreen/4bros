@@ -30,3 +30,10 @@ class OffensiveStats(Base):
     broke_tkls = Column(Integer)
     fumbles = Column(Integer)
     twenty_plus_yd_runs = Column(Integer)
+    
+    def __repr__(self):
+        return f"""
+            Passing Yards: {self.pass_yards}\n
+            Rushing Yards: {self.rush_yards}\n 
+            Receiving Yards: {self.rec_yards}
+            """

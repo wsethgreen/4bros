@@ -7,7 +7,6 @@ from data import(
     off_stats,
     team_info
 )
-
 from constants import(
     Base,
     engine,
@@ -27,12 +26,21 @@ defensive_stats_all: List[DefensiveStats] = session.query(DefensiveStats).all()
 
 offensive_stats_all: List[OffensiveStats] = session.query(OffensiveStats).all()
 
+jared_yates = session.query(PlayerInfo).filter(PlayerInfo.player_id == 8106).one()
+print(jared_yates)
+jared_yates_off_stats = session.query(OffensiveStats).filter(OffensiveStats.player_id == jared_yates.player_id).one()
+print(jared_yates_off_stats)
 
-print(f'Team Dict Records: {len(team_info)}')
-print(f'Team DB Records: {len(teams)}')
-print(f'Player Info Dict Records: {len(player_info)}')
-print(f'Player Info DB Records: {len(players)}')
-print(f'Player Def Stats Dict Records: {len(def_stats)}')
-print(f'Player Def Stats DB Records: {len(defensive_stats_all)}')
-print(f'Player Off Stats Dict Records: {len(off_stats)}')
-print(f'Player Off Stats DB Records: {len(offensive_stats_all)}')
+
+### 
+# Check for length of dictionary records compared to DB records
+###
+
+# print(f'Team Dict Records: {len(team_info)}')
+# print(f'Team DB Records: {len(teams)}')
+# print(f'Player Info Dict Records: {len(player_info)}')
+# print(f'Player Info DB Records: {len(players)}')
+# print(f'Player Def Stats Dict Records: {len(def_stats)}')
+# print(f'Player Def Stats DB Records: {len(defensive_stats_all)}')
+# print(f'Player Off Stats Dict Records: {len(off_stats)}')
+# print(f'Player Off Stats DB Records: {len(offensive_stats_all)}')

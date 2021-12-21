@@ -29,11 +29,13 @@ def insert_def_stats_into_db(def_stats):
     for i, value in enumerate(def_stats):
         record = def_stats[i]
         
+        readable_year = ncaa_dynasty.player_year_converter(record.fields['Year'])
+        
         new_player = DefensiveStats(
             player_id=record.fields['Player ID'],
             long_int_ret=record.fields['Long INT Ret'],
             sacks=record.fields['Sacks'],
-            year=record.fields['Year'],
+            year=readable_year,
             forced_fumbles=record.fields['Forced Fumbles'],
             solo_tkls=record.fields['Solo Tkls'],
             safeties=record.fields['Safties'],
@@ -53,6 +55,7 @@ def insert_def_stats_into_db(def_stats):
 
         if player is None:
             session.add(new_player)
+            session.flush()
         else:
             update(DefensiveStats).where(DefensiveStats.player_id == new_player.player_id).values(
                 player_id=new_player.player_id,
@@ -74,8 +77,9 @@ def insert_def_stats_into_db(def_stats):
                 fum_rec_yards=new_player.fum_rec_yards,
                 int_ret_yards=new_player.int_ret_yards
             )
-        session.commit()
-
+            session.flush()
+            
+    session.commit()
     session.close()
 
 
@@ -84,13 +88,15 @@ def insert_off_stats_into_db(off_stats):
     for i, value in enumerate(off_stats):
         record = off_stats[i]
         
+        readable_year = ncaa_dynasty.player_year_converter(record.fields['Year'])
+        
         new_player = OffensiveStats(
             player_id=record.fields['Player ID'],
             pass_yards=record.fields['Pass. Yards'],
             longest_rec=record.fields['Longest Rec.'],
             longest_pass=record.fields['Longest Pass'],
             longest_run=record.fields['Longest Run'],
-            year=record.fields['Year'],
+            year=readable_year,
             receptions=record.fields['Receptions'],
             sacked=record.fields['Sacked'],
             rec_yards=record.fields['Rec. Yards'],
@@ -115,6 +121,7 @@ def insert_off_stats_into_db(off_stats):
 
         if player is None:
             session.add(new_player)
+            session.flush()
         else:
             update(OffensiveStats).where(OffensiveStats.player_id == new_player.player_id).values(
                 player_id=new_player.player_id,
@@ -142,8 +149,9 @@ def insert_off_stats_into_db(off_stats):
                 fumbles=new_player.fumbles,
                 twenty_plus_yd_runs=new_player.twenty_plus_yd_runs
             )
-        session.commit()
+            session.flush()
 
+    session.commit()
     session.close()
 
 
@@ -220,7 +228,7 @@ def insert_player_info_into_db(player_info):
 
         if player is None:
             session.add(new_player)
-            session.commit()
+            session.flush()
         else:
             update(PlayerInfo).where(PlayerInfo.player_id == new_player.player_id).values(
                 player_id=new_player.player_id,
@@ -276,8 +284,9 @@ def insert_player_info_into_db(player_info):
                 juke_move=new_player.juke_move,
                 games_played=new_player.games_played,
             )
-        session.commit()
-
+            session.flush()
+            
+    session.commit()
     session.close()
 
 
