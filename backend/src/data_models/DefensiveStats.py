@@ -1,10 +1,7 @@
 from sqlalchemy import Column, Integer
 from sqlalchemy.sql.schema import ForeignKey
-from sqlalchemy.sql.sqltypes import Float
-from constants import(
-    Base,
-    engine
-)
+from sqlalchemy.sql.sqltypes import Float, String
+from constants import(Base)
 
 
 class DefensiveStats(Base):
@@ -12,7 +9,7 @@ class DefensiveStats(Base):
     player_id = Column(Integer, ForeignKey('player_info.player_id'), primary_key=True)
     long_int_ret = Column(Integer)
     sacks = Column(Float)
-    year = Column(Integer, ForeignKey('week_year.year'))
+    year = Column(String(10))
     forced_fumbles = Column(Integer)
     solo_tkls = Column(Float)
     safeties = Column(Integer)

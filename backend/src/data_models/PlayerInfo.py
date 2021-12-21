@@ -15,6 +15,7 @@ class PlayerInfo(Base):
     power_moves = Column(Integer)
     kick_accuracy = Column(Integer)
     redshirt = Column(Integer)
+    year = Column(String(10))
     jersey_number = Column(Integer)
     throwing_power = Column(Integer)
     throwing_accuracy = Column(Integer)
@@ -43,10 +44,10 @@ class PlayerInfo(Base):
     kick_power = Column(Integer)
     awareness = Column(Integer)
     release = Column(Integer)
-    position = Column(Integer)
+    position = Column(String(4))
     spec_catch = Column(Integer)
     elusiveness = Column(Integer)
-    height = Column(Integer)
+    height = Column(String(10))
     spin_move = Column(Integer)
     weight = Column(Integer)
     hit_power = Column(Integer)
@@ -56,3 +57,6 @@ class PlayerInfo(Base):
     finesse_moves = Column(Integer)
     juke_move = Column(Integer)
     games_played = Column(Integer)
+
+    def __repr__(self):
+        return f'ID: {self.player_id}, Name: {self.first_name} {self.last_name}'

@@ -10,6 +10,3 @@ class WeekYear(Base):
     __tablename__ = 'week_year'
     week = Column(Integer)
     year = Column(Integer, primary_key=True)
-
-
-# Base.metadata.create_all(engine)

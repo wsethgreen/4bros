@@ -16,3 +16,6 @@ class TeamInfo(Base):
     losses = Column(Integer)
     media_poll_points = Column(Integer)
     coachs_poll_points = Column(Integer)
+
+    def __repr__(self):
+        return f'ID: {self.team_id}, Name: {self.team_name}'

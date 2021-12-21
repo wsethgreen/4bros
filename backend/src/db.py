@@ -1,4 +1,5 @@
 from typing import List
+from data_models.PlayerInfo import PlayerInfo
 from constants import(
     Base,
     engine,
@@ -14,30 +15,21 @@ from data import (
     week_year,
     team_info
     )
-from data_models.Commits import Commits
-from data_models.DefensiveStats import DefensiveStats
-from data_models.KickingStats import KickingStats
-from data_models.OffensiveStats import OffensiveStats
-from data_models.PlayerInfo import PlayerInfo
-from data_models.ReturnStats import ReturnStats
-from data_models.TeamInfo import TeamInfo
-from data_models.WeekYear import WeekYear
 from db_scripts import (
     insert_def_stats_into_db,
     insert_player_info_into_db,
+    insert_off_stats_into_db,
     insert_team_info_into_db,
     )
 
 
 # Create all DB tables
+# Base.metadata.drop_all(bind=engine, tables=[PlayerInfo.__table__])
 Base.metadata.create_all(engine)
 
 
 # Insert all data to DB tables
 insert_team_info_into_db(team_info)
 insert_player_info_into_db(player_info)
-
-
-players: List[PlayerInfo] = session.query(Base.metadata.tables(PlayerInfo.__tablename__)).all()
-
-print(len(players))
+insert_def_stats_into_db(def_stats)
+insert_off_stats_into_db(off_stats)

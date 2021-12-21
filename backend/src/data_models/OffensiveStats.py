@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer
 from sqlalchemy.sql.schema import ForeignKey
+from sqlalchemy.sql.sqltypes import String
 from constants import Base
 
 
@@ -10,7 +11,7 @@ class OffensiveStats(Base):
     longest_rec = Column(Integer)
     longest_pass = Column(Integer)
     longest_run = Column(Integer)
-    year = Column(Integer)
+    year = Column(String(10))
     receptions = Column(Integer)
     sacked = Column(Integer)
     rec_yards = Column(Integer)

@@ -10,6 +10,7 @@ from constants import(
 
 data = ncaa_dynasty.read_database(dynasty_file_path, user_teams)
 
+# List of records for each data category
 def_stats = data['Defensive Stats'].records
 kicking_stats = data['Kicking Stats'].records
 player_info = data['Player Info'].records
@@ -18,3 +19,6 @@ return_stats = data['Return Stats'].records
 off_stats = data['Offensive Stats'].records
 week_year = data['Week/Year'].records
 team_info = data['Team Info'].records
+
+for k in off_stats[0].fields:
+    print(k)
