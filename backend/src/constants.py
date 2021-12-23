@@ -1,3 +1,4 @@
+from enum import Enum
 from sqlalchemy import create_engine
 from sqlalchemy.orm import(
     declarative_base,
@@ -11,7 +12,14 @@ user_teams = {'Syracuse', 'USC', 'Vanderbilt', 'Wyoming'}
 
 
 # DB constants
-engine = create_engine("sqlite+pysqlite:///backend/ncaa.db", echo=True, future=True)
+db_path = "sqlite+pysqlite:///backend/ncaa.db?check_same_thread=False"
+engine = create_engine(db_path, echo=True, future=True)
 Session = sessionmaker(bind=engine)
 session = Session()
 Base = declarative_base()
+
+
+# Request methods
+class HTTPMethods(Enum):
+    GET = 'GET'
+    POST = 'POST'

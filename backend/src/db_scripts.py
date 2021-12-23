@@ -5,7 +5,6 @@ from sqlalchemy.sql.expression import update
 from sqlalchemy.sql import exists
 
 from constants import(
-    engine,
     session
 )
 from data import (
