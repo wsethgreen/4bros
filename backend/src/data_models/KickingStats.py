@@ -16,7 +16,6 @@ class KickingStats(Base):
     punts_blocked = Column(Integer)
     fg_att = Column(Integer)
     total_punt_yards = Column(Integer)
-    fg_att_17_29 = Column(Integer)
     xp_blocked = Column(Integer)
     fg_blocked = Column(Integer)
     fg_att_40_49 = Column(Integer)

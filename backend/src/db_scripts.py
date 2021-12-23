@@ -18,10 +18,50 @@ from data import (
     week_year,
     team_info
 )
+from data_models.Commits import Commits
 from data_models.DefensiveStats import DefensiveStats
+from data_models.KickingStats import KickingStats
 from data_models.PlayerInfo import PlayerInfo
 from data_models.OffensiveStats import OffensiveStats
 from data_models.TeamInfo import TeamInfo
+from data_models.WeekYear import WeekYear
+
+
+def insert_commits_into_db(commits):
+    
+    for i, value in enumerate(commits):
+        record = commits[i]
+        
+        new_commit = Commits(
+            stars=record.fields['Stars'],
+            name=record.fields['Name'],
+            position=record.fields['Position'],
+            rank=record.fields['Rank'],
+            school=record.fields['School']
+        )
+        
+        commit = session.query(Commits).filter(
+            Commits.name == new_commit.name).scalar()
+        
+        if commit is None:
+            session.add(new_commit)
+            session.flush()
+        else:
+            update(Commits).where(Commits.name == new_commit.name).values(
+                stars=new_commit.stars,
+                name=new_commit.name,
+                position=new_commit.position,
+                rank=new_commit.rank,
+                school=new_commit.school
+            )
+            session.flush()
+        
+        try:
+            session.commit()
+        except:
+            session.rollback()
+        finally:
+            session.close()
 
 
 def insert_def_stats_into_db(def_stats):
@@ -51,7 +91,8 @@ def insert_def_stats_into_db(def_stats):
             fum_rec_yards=record.fields['Fum. Rec. Yards'],
             int_ret_yards=record.fields['INT Ret. Yards']
         )
-        player: DefensiveStats = session.query(DefensiveStats).filter(DefensiveStats.player_id == new_player.player_id).scalar()
+        player: DefensiveStats = session.query(DefensiveStats).filter(
+            DefensiveStats.player_id == new_player.player_id).scalar()
 
         if player is None:
             session.add(new_player)
@@ -78,10 +119,93 @@ def insert_def_stats_into_db(def_stats):
                 int_ret_yards=new_player.int_ret_yards
             )
             session.flush()
-            
-    session.commit()
-    session.close()
+    try:
+        session.commit()
+    except:
+        session.rollback()
+    finally:
+        session.close()
 
+
+def insert_kicking_stats_into_db(kicking_stats):
+    
+    for i, value in enumerate(kicking_stats):
+        record = kicking_stats[i]
+        
+        new_player = KickingStats(
+            player_id=record.fields['Player ID'],
+            fg_made_17_29=record.fields['FG Made 17-29'],
+            fg_att_17_29=record.fields['FG Att. 17-29'],
+            long_fg=record.fields['Long FG'],
+            ko_touchbacks=record.fields['KO Touchbacks'],
+            long_punt=record.fields['Long Punt'],
+            xp_att=record.fields['XP Att.'],
+            year=record.fields['Year'],
+            punts_blocked=record.fields['Punts Blocked'],
+            fg_att=record.fields['FG Att.'],
+            total_punt_yards=record.fields['Total Punt Yards'],
+            xp_blocked=record.fields['XP Blocked'],
+            fg_blocked=record.fields['FG Blocked'],
+            fg_att_40_49=record.fields['FG Att. 40-49'],
+            fg_made_40_49=record.fields['FG Made 40-49'],
+            fg_att_30_39=record.fields['FG Att. 30-39'],
+            fg_made_30_39=record.fields['FG Att. 30-39'],
+            fg_att_50_plus=record.fields['FG Att. 50+'],
+            fg_made_50_plus=record.fields['FG Made 50+'],
+            punt_touchbacks=record.fields['Punt Touchbacks'],
+            games_played=record.fields['Games Played'],
+            kickoffs=record.fields['Kickoffs'],
+            xp_made=record.fields['XP Made'],
+            net_punting=record.fields['Net Punting'],
+            fg_made=record.fields['FG Made'],
+            number_punts=record.fields['# Punts'],
+            inside_twenty=record.fields['Inside 20']
+        )
+        
+        player = session.query(KickingStats).filter(
+            KickingStats.player_id == new_player.player_id
+        ).scalar()
+        
+        if player is None:
+            session.add(new_player)
+            session.flush()
+        else:
+            update(KickingStats).where(KickingStats.player_id == new_player.player_id).values(
+                player_id=new_player.player_id,
+                fg_made_17_29=new_player.fg_made_17_29,
+                fg_att_17_29=new_player.fg_att_17_29,
+                long_fg=new_player.long_fg,
+                ko_touchdowns=new_player.ko_touchbacks,
+                long_punt=new_player.long_punt,
+                xp_att=new_player.xp_att,
+                year=new_player.year,
+                punts_blocked=new_player.punts_blocked,
+                fg_att=new_player.fg_att,
+                total_punt_yards=new_player.total_punt_yards,
+                xp_blocked=new_player.xp_blocked,
+                fg_blocked=new_player.fg_blocked,
+                fg_att_40_49=new_player.fg_att_40_49,
+                fg_made_40_49=new_player.fg_made_40_49,
+                fg_att_30_39=new_player.fg_att_30_39,
+                fg_made_30_39=new_player.fg_made_30_39,
+                fg_att_50_plus=new_player.fg_att_50_plus,
+                fg_made_50_plus=new_player.fg_made_50_plus,
+                punt_touchbacks=new_player.punt_touchbacks,
+                games_played=new_player.games_played,
+                kickoffs=new_player.kickoffs,
+                xp_made=new_player.xp_made,
+                net_punting=new_player.net_punting,
+                fg_made=new_player.fg_made,
+                number_punts=new_player.number_punts,
+                inside_twenty=new_player.inside_twenty
+            )
+            session.flush
+    try:
+        session.commit()
+    except:
+        session.rollback()
+    finally:
+        session.close()
 
 def insert_off_stats_into_db(off_stats):
     
@@ -117,7 +241,8 @@ def insert_off_stats_into_db(off_stats):
             twenty_plus_yd_runs=record.fields['20+ yd. Runs']
         )
         
-        player: OffensiveStats = session.query(OffensiveStats).filter(OffensiveStats.player_id == new_player.player_id).scalar()
+        player: OffensiveStats = session.query(OffensiveStats).filter(
+            OffensiveStats.player_id == new_player.player_id).scalar()
 
         if player is None:
             session.add(new_player)
@@ -150,14 +275,15 @@ def insert_off_stats_into_db(off_stats):
                 twenty_plus_yd_runs=new_player.twenty_plus_yd_runs
             )
             session.flush()
-
-    session.commit()
-    session.close()
+    try:
+        session.commit()
+    except:
+        session.rollback()
+    finally:
+        session.close()
 
 
 def insert_player_info_into_db(player_info):
-    
-    players: List[PlayerInfo] = []
     
     for i, value in enumerate(player_info):
         
@@ -224,7 +350,8 @@ def insert_player_info_into_db(player_info):
             games_played=record.fields['Games Played'],
         )
         
-        player: PlayerInfo = session.query(PlayerInfo).filter(PlayerInfo.player_id == new_player.player_id).scalar()
+        player: PlayerInfo = session.query(PlayerInfo).filter(
+            PlayerInfo.player_id == new_player.player_id).scalar()
 
         if player is None:
             session.add(new_player)
@@ -286,8 +413,12 @@ def insert_player_info_into_db(player_info):
             )
             session.flush()
             
-    session.commit()
-    session.close()
+    try:
+        session.commit()
+    except:
+        session.rollback()
+    finally:
+        session.close()
 
 
 
@@ -311,11 +442,12 @@ def insert_team_info_into_db(team_info):
             coachs_poll_points=record.fields["Coach's Poll Points"],
         )
         
-        team: TeamInfo = session.query(TeamInfo).filter(TeamInfo.team_id == new_team.team_id).scalar()
+        team: TeamInfo = session.query(TeamInfo).filter(
+            TeamInfo.team_id == new_team.team_id).scalar()
         
         if team is None:
             session.add(new_team)
-            session.commit()
+            session.flush()
         else:
             update(TeamInfo).where(TeamInfo.team_id == new_team.team_id).values(
                 team_id=new_team.team_id,
@@ -331,8 +463,35 @@ def insert_team_info_into_db(team_info):
                 media_poll_points=new_team.media_poll_points,
                 coachs_poll_points=new_team.coachs_poll_points,
             )
-            session.commit()
-    session.close()
+            session.flush()
+    try:
+        session.commit()
+    except:
+        session.rollback()
+    finally:
+        session.close()
 
 
-
+def insert_week_year_into_db(week_year):
+    
+    record = week_year[0]
+    
+    new_week_year = WeekYear(
+        week=record.fields['Week'],
+        year=record.fields['Year']
+    )
+    
+    week_year_query: WeekYear = session.query(WeekYear).filter(
+        WeekYear.week == new_week_year.week,
+        WeekYear.year == new_week_year.year
+    ).scalar()
+    
+    if week_year_query is None:
+        session.add(new_week_year)
+        session.flush()
+    try:
+        session.commit()
+    except:
+        session.rollback()
+    finally:
+        session.close()
