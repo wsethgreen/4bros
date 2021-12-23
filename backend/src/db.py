@@ -19,8 +19,9 @@ from db_scripts import (
     insert_commits_into_db,
     insert_def_stats_into_db,
     insert_kicking_stats_into_db,
-    insert_player_info_into_db,
     insert_off_stats_into_db,
+    insert_player_info_into_db,
+    insert_return_stats_into_db,
     insert_team_info_into_db,
     insert_week_year_into_db
     )
@@ -37,3 +38,4 @@ insert_off_stats_into_db(off_stats)
 insert_week_year_into_db(week_year)
 insert_commits_into_db(commits)
 insert_kicking_stats_into_db(kicking_stats)
+insert_return_stats_into_db(return_stats)

@@ -20,5 +20,5 @@ off_stats = data['Offensive Stats'].records
 week_year = data['Week/Year'].records
 team_info = data['Team Info'].records
 
-for key in kicking_stats[0].fields:
+for key in return_stats[0].fields:
     print(key)

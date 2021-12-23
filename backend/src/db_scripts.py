@@ -21,8 +21,9 @@ from data import (
 from data_models.Commits import Commits
 from data_models.DefensiveStats import DefensiveStats
 from data_models.KickingStats import KickingStats
-from data_models.PlayerInfo import PlayerInfo
 from data_models.OffensiveStats import OffensiveStats
+from data_models.PlayerInfo import PlayerInfo
+from data_models.ReturnStats import ReturnStats
 from data_models.TeamInfo import TeamInfo
 from data_models.WeekYear import WeekYear
 
@@ -420,6 +421,52 @@ def insert_player_info_into_db(player_info):
     finally:
         session.close()
 
+
+def insert_return_stats_into_db(return_stats):
+    
+    for i, value in enumerate(return_stats):
+        record = return_stats[i]
+        
+        new_player = ReturnStats(
+            player_id=record.fields['Player ID'],
+            kick_returns=record.fields['Kick Returns'],
+            year=record.fields['Year'],
+            long_kr=record.fields['Long KR'],
+            punt_returns=record.fields['Punt Returns'],
+            long_pr=record.fields['Long PR'],
+            games_played=record.fields['Games Played'],
+            kr_tds=record.fields['KR TDs'],
+            pr_tds=record.fields['PR TDs'],
+            kr_yds=record.fields['KR Yds.'],
+            pr_yds=record.fields['PR Yds.'],
+        )
+        
+        player = session.query(ReturnStats).filter(ReturnStats.player_id == new_player.player_id).scalar()
+        
+        if player is None:
+            session.add(new_player)
+            session.flush()
+        else:
+            update(ReturnStats).where(ReturnStats.player_id == new_player.player_id).values(
+                player_id=new_player.player_id,
+                kick_returns=new_player.kick_returns,
+                year=new_player.year,
+                long_kr=new_player.long_kr,
+                punt_returns=new_player.punt_returns,
+                long_pr=new_player.long_pr,
+                games_played=new_player.games_played,
+                kr_tds=new_player.kr_tds,
+                pr_tds=new_player.pr_tds,
+                kr_yds=new_player.kr_yds,
+                pr_yds=new_player.pr_yds,
+            )
+            session.flush()
+    try:
+        session.commit()
+    except:
+        session.rollback()
+    finally:
+        session.close()
 
 
 def insert_team_info_into_db(team_info):
