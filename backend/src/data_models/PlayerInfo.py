@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.sql.schema import ForeignKey
 from constants import Base
 
 
+@dataclass
 class PlayerInfo(Base):
     __tablename__ = 'player_info'
     player_id = Column(Integer, primary_key=True)

@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from sqlalchemy import(
     Column,
     Integer,
@@ -7,6 +8,7 @@ from sqlalchemy import(
 from constants import Base
 
 
+@dataclass
 class Commits(Base):
     __tablename__ = 'commits'
     stars = Column(Integer)

@@ -1,6 +1,4 @@
-from typing import List
 import ncaa_dynasty
-import sqlalchemy
 
 from constants import(
     dynasty_file_path,

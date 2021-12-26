@@ -1,9 +1,11 @@
+from dataclasses import dataclass
 from sqlalchemy import Column, Integer
 from sqlalchemy.sql.schema import ForeignKey
 from sqlalchemy.sql.sqltypes import Float, String
 from constants import(Base)
 
 
+@dataclass
 class DefensiveStats(Base):
     __tablename__ = 'defensive_stats'
     player_id = Column(Integer, ForeignKey('player_info.player_id'), primary_key=True)

@@ -1,7 +1,9 @@
+from dataclasses import dataclass
 from sqlalchemy import Column, Integer, String
+
 from constants import Base
 
-
+@dataclass
 class TeamInfo(Base):
     __tablename__ = 'team_info'
     team_id = Column(Integer, primary_key=True)
@@ -19,3 +21,4 @@ class TeamInfo(Base):
 
     def __repr__(self):
         return f'ID: {self.team_id}, Name: {self.team_name}'
+

@@ -1,9 +1,11 @@
+from dataclasses import dataclass
 from sqlalchemy import Column, Integer
 from sqlalchemy.sql.schema import ForeignKey
 from sqlalchemy.sql.sqltypes import String
 from constants import Base
 
 
+@dataclass
 class OffensiveStats(Base):
     __tablename__ = 'offensive_stats'
     player_id = Column(Integer, ForeignKey('player_info.player_id'), primary_key=True)
@@ -30,10 +32,3 @@ class OffensiveStats(Base):
     broke_tkls = Column(Integer)
     fumbles = Column(Integer)
     twenty_plus_yd_runs = Column(Integer)
-    
-    def __repr__(self):
-        return f"""
-            Passing Yards: {self.pass_yards}\n
-            Rushing Yards: {self.rush_yards}\n 
-            Receiving Yards: {self.rec_yards}
-            """

@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from sqlalchemy import Column, Integer
 from constants import(
     Base,
@@ -6,6 +7,7 @@ from constants import(
 )
 
 
+@dataclass
 class WeekYear(Base):
     __tablename__ = 'week_year'
     week = Column(Integer)

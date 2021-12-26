@@ -1,10 +1,7 @@
-from flask import Flask
-from flask_cors import CORS
-
+from constants import app
 from blueprints.teams import teams_bp
 
-app = Flask(__name__)
-CORS(app)
+
 
 blueprints = [
     teams_bp
