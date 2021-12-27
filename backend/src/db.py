@@ -1,9 +1,6 @@
-from typing import List
-from data_models.PlayerInfo import PlayerInfo
 from constants import(
     Base,
     engine,
-    session
 )
 from data import (
     def_stats,

@@ -19,19 +19,16 @@ from data_models.OffensiveStats import OffensiveStats
 from data_models.TeamInfo import TeamInfo
 
 
-teams: List[TeamInfo] = session.query(TeamInfo).all()
-
-players: List[PlayerInfo] = session.query(PlayerInfo).all()
-
-defensive_stats_all: List[DefensiveStats] = session.query(DefensiveStats).all()
-
-offensive_stats_all: List[OffensiveStats] = session.query(OffensiveStats).all()
 
 jared_yates = session.query(PlayerInfo).filter(PlayerInfo.player_id == 8106).one()
 print(jared_yates)
 jared_yates_off_stats = session.query(OffensiveStats).filter(OffensiveStats.player_id == jared_yates.player_id).one()
 print(jared_yates_off_stats)
-print(week_year[0].fields)
+
+players: List[PlayerInfo] = session.query(PlayerInfo).filter(
+    PlayerInfo.team_id == 115).all()
+
+print(players[:10])
 
 
 ### 

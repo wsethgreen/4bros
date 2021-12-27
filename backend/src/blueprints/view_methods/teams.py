@@ -1,11 +1,6 @@
-from flask import jsonify
 from typing import List
-from sqlalchemy.ext.serializer import loads, dumps
 
-from constants import(
-    engine,
-    session
-)
+from constants import session
 
 from data_models.TeamInfo import TeamInfo
 from responses.Teams import TeamSchema
