@@ -32,3 +32,6 @@ class OffensiveStats(Base):
     broke_tkls = Column(Integer)
     fumbles = Column(Integer)
     twenty_plus_yd_runs = Column(Integer)
+    
+    def __repr__(self) -> str:
+        return f'ID: {self.player_id}, Passing Yds: {self.pass_yards}, Passing TDs: {self.pass_tds}'

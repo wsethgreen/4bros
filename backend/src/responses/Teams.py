@@ -1,7 +1,7 @@
-from constants import ma
+from marshmallow import fields, Schema
 
 
-class TeamSchema(ma.Schema):
+class TeamSchema(Schema):
     class Meta:
         fields = (
             'team_id',

@@ -6,11 +6,14 @@ from data_models.TeamInfo import TeamInfo
 from responses.Teams import TeamSchema
 
 
+team_schema = TeamSchema()
+teams_schema = TeamSchema(many=True)
+
+
 def get_all_teams(request) -> TeamSchema:
     
     teams: List[TeamInfo] = session.query(TeamInfo).all()
-    team_schema = TeamSchema()
-    teams_json = [team_schema.dump(team) for team in teams]
+    teams_json = teams_schema.dump(teams)
     
     response = {
         'teams': teams_json
@@ -22,7 +25,6 @@ def get_all_teams(request) -> TeamSchema:
 def get_team_by_team_id(request, team_id) -> TeamSchema:
     
     team: TeamInfo = session.query(TeamInfo).where(TeamInfo.team_id == team_id).one()
-    team_schema = TeamSchema()
     response: TeamSchema = team_schema.dump(team)
     
     return response

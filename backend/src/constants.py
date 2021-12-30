@@ -1,7 +1,6 @@
 from enum import Enum
 from flask import Flask
 from flask_cors import CORS
-from flask_marshmallow import Marshmallow
 from sqlalchemy import create_engine
 from sqlalchemy.orm import(
     declarative_base,
@@ -12,7 +11,6 @@ from sqlalchemy.orm import(
 # App constants
 app = Flask(__name__)
 app.config['SQL_ALCHEMY_DATABASE_URI'] = "sqlite+pysqlite:///backend/ncaa.db"
-ma = Marshmallow(app)
 CORS(app)
 
 
