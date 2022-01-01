@@ -1,5 +1,7 @@
 from typing import List
 
+from sqlalchemy.sql.expression import desc
+
 from constants import session
 
 from data_models.TeamInfo import TeamInfo
@@ -12,7 +14,7 @@ teams_schema = TeamSchema(many=True)
 
 def get_all_teams(request) -> TeamSchema:
     
-    teams: List[TeamInfo] = session.query(TeamInfo).all()
+    teams: List[TeamInfo] = session.query(TeamInfo).order_by(desc(TeamInfo.is_user)).all()
     teams_json = teams_schema.dump(teams)
     
     response = {

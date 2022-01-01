@@ -7,6 +7,7 @@ class TeamSchema(Schema):
             'team_id',
             'team_name',
             'team_short_name',
+            'is_user'
             'coachs_poll_1st_votes',
             'nickname',
             'wins',

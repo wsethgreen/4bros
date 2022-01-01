@@ -1,5 +1,10 @@
 from dataclasses import dataclass
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import(
+    Boolean,
+    Column,
+    Integer,
+    String
+    )
 
 from constants import Base
 
@@ -9,6 +14,7 @@ class TeamInfo(Base):
     team_id = Column(Integer, primary_key=True)
     team_name = Column(String(50))
     team_short_name = Column(String(50))
+    is_user = Column(Boolean)
     coachs_poll_1st_votes = Column(Integer)
     nickname = Column(String(50))
     wins = Column(Integer)

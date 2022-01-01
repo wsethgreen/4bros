@@ -5,7 +5,8 @@ from sqlalchemy.sql.expression import update
 from sqlalchemy.sql import exists
 
 from constants import(
-    session
+    session,
+    user_teams
 )
 from data import (
     def_stats,
@@ -477,6 +478,7 @@ def insert_team_info_into_db(team_info):
             team_id=record.fields['Team ID'],
             team_name=record.fields['Team Name'],
             team_short_name=record.fields['Team Short Name'],
+            is_user=True if record.fields['Team Name'] in user_teams else False,
             coachs_poll_1st_votes=record.fields["Coach's Poll 1st Votes"],
             nickname=record.fields['Nickname'],
             wins=record.fields['Wins'],

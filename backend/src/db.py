@@ -25,6 +25,7 @@ from db_scripts import (
 
 
 # Create all DB tables
+Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)
 
 # Insert all data to DB tables
