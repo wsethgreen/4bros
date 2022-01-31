@@ -1,14 +1,14 @@
 import React from 'react';
-import  AllTeams from '../components/AllTeams';
 import Navbar from '../components/NavBar';
+import TeamNav from '../components/TeamNav';
 
-const TeamsPage = () => {
+const SingleTeamPage = () => {
     return (
         <div>
             <Navbar />
-            <AllTeams />
+            <TeamNav />
         </div>
     )
 }
 
-export default TeamsPage
+export default SingleTeamPage;

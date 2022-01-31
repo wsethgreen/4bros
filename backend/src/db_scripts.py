@@ -1,3 +1,4 @@
+from dataclasses import replace
 import ncaa_dynasty
 from typing import List
 from sqlalchemy import exc
@@ -18,6 +19,7 @@ from data import (
     week_year,
     team_info
 )
+from helpers import _convert_stats_year
 from data_models.Commits import Commits
 from data_models.DefensiveStats import DefensiveStats
 from data_models.KickingStats import KickingStats
@@ -70,7 +72,7 @@ def insert_def_stats_into_db(def_stats):
     for i, value in enumerate(def_stats):
         record = def_stats[i]
         
-        readable_year = ncaa_dynasty.player_year_converter(record.fields['Year'])
+        readable_year = _convert_stats_year(record.fields['Year'])
         
         new_player = DefensiveStats(
             player_id=record.fields['Player ID'],
@@ -133,6 +135,8 @@ def insert_kicking_stats_into_db(kicking_stats):
     for i, value in enumerate(kicking_stats):
         record = kicking_stats[i]
         
+        readable_year = _convert_stats_year(record.fields['Year'])
+        
         new_player = KickingStats(
             player_id=record.fields['Player ID'],
             fg_made_17_29=record.fields['FG Made 17-29'],
@@ -141,7 +145,7 @@ def insert_kicking_stats_into_db(kicking_stats):
             ko_touchbacks=record.fields['KO Touchbacks'],
             long_punt=record.fields['Long Punt'],
             xp_att=record.fields['XP Att.'],
-            year=record.fields['Year'],
+            year=readable_year,
             punts_blocked=record.fields['Punts Blocked'],
             fg_att=record.fields['FG Att.'],
             total_punt_yards=record.fields['Total Punt Yards'],
@@ -213,7 +217,7 @@ def insert_off_stats_into_db(off_stats):
     for i, value in enumerate(off_stats):
         record = off_stats[i]
         
-        readable_year = ncaa_dynasty.player_year_converter(record.fields['Year'])
+        readable_year = _convert_stats_year(record.fields['Year'])
         
         new_player = OffensiveStats(
             player_id=record.fields['Player ID'],
@@ -427,10 +431,12 @@ def insert_return_stats_into_db(return_stats):
     for i, value in enumerate(return_stats):
         record = return_stats[i]
         
+        readable_year = _convert_stats_year(record.fields['Year'])
+        
         new_player = ReturnStats(
             player_id=record.fields['Player ID'],
             kick_returns=record.fields['Kick Returns'],
-            year=record.fields['Year'],
+            year=readable_year,
             long_kr=record.fields['Long KR'],
             punt_returns=record.fields['Punt Returns'],
             long_pr=record.fields['Long PR'],
@@ -524,9 +530,11 @@ def insert_week_year_into_db(week_year):
     
     record = week_year[0]
     
+    readable_year = _convert_stats_year(record.fields['Year'])
+    
     new_week_year = WeekYear(
         week=record.fields['Week'],
-        year=record.fields['Year']
+        year=readable_year
     )
     
     week_year_query: WeekYear = session.query(WeekYear).filter(
