@@ -8,7 +8,7 @@ from sqlalchemy.orm import(
 )
 
 # App constants
-app = Flask(__name__, static_folder='4bros/build', static_url_path='')
+app = Flask(__name__, static_folder='four_bros/build', static_url_path='')
 app.config['SQL_ALCHEMY_DATABASE_URI'] = "sqlite+pysqlite:///backend/ncaa.db"
 CORS(app)
 

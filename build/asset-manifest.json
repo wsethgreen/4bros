@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e09bd4fe.chunk.css",
+    "main.js": "/static/js/main.96890409.chunk.js",
+    "main.js.map": "/static/js/main.96890409.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ada236ff.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ada236ff.js.map",
+    "static/js/2.e86e920a.chunk.js": "/static/js/2.e86e920a.chunk.js",
+    "static/js/2.e86e920a.chunk.js.map": "/static/js/2.e86e920a.chunk.js.map",
+    "static/js/3.1c981274.chunk.js": "/static/js/3.1c981274.chunk.js",
+    "static/js/3.1c981274.chunk.js.map": "/static/js/3.1c981274.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.e09bd4fe.chunk.css.map": "/static/css/main.e09bd4fe.chunk.css.map",
+    "static/js/2.e86e920a.chunk.js.LICENSE.txt": "/static/js/2.e86e920a.chunk.js.LICENSE.txt",
+    "static/media/ncaa_football_logo.d32b2a04.png": "/static/media/ncaa_football_logo.d32b2a04.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ada236ff.js",
+    "static/js/2.e86e920a.chunk.js",
+    "static/css/main.e09bd4fe.chunk.css",
+    "static/js/main.96890409.chunk.js"
+  ]
+}
